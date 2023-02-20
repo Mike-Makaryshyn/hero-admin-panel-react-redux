@@ -1,0 +1,61 @@
+{
+  "heroes": [
+    {
+      "id": "6fa54efe-6878-4ad3-9653-37d1b9109809",
+      "name": "Oliver",
+      "description": "I can do insane things",
+      "element": "fire"
+    },
+    {
+      "id": "d440bdb2-0a35-4994-ae7d-c27ad87233b4",
+      "name": "Corban",
+      "description": "Hey, what's up",
+      "element": "water"
+    },
+    {
+      "id": "22caa9ce-6206-4518-bf7a-0d1e5e51298c",
+      "name": "Marta",
+      "description": "Nice to meet you",
+      "element": ""
+    },
+    {
+      "id": "d9545ddb-5c8e-49f5-801d-b5ce3015cbfd",
+      "name": "Roman",
+      "description": "Yo, let's drink some beer?",
+      "element": "wind"
+    },
+    {
+      "id": "e496bd72-1bd4-4510-9670-f23e2ea6827d",
+      "name": "Мишаня",
+      "description": "Hello, I was looking for you!",
+      "element": "water"
+    }
+  ],
+  "filters": [
+    {
+      "name": "all",
+      "label": "All",
+      "className": "btn-outline-dark"
+    },
+    {
+      "name": "fire",
+      "label": "Fire",
+      "className": "btn-danger"
+    },
+    {
+      "name": "water",
+      "label": "Water",
+      "className": "btn-primary"
+    },
+    {
+      "name": "wind",
+      "label": "Wind",
+      "className": "btn-success"
+    },
+    {
+      "name": "earth",
+      "label": "Earth",
+      "className": "btn-secondary"
+    }
+  ]
+}

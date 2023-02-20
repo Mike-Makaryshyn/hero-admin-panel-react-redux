@@ -1,0 +1,35 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    padding: 0;
+}
+
+.hero-enter {
+   opacity: 0;
+   transform: translate(-40%, -150%);
+}
+
+.hero-enter-active {
+   opacity: 1;
+   transform: translate(0%, 0%);
+   transition: all 500ms ease-in;
+}
+
+.hero-exit {
+   opacity: 1;
+   transform: translate(0%, 0%);
+}
+
+.hero-exit-active {
+   opacity: 0;
+   transform: translate(40%, 150%);
+   transition: all 350ms ease-in;
+}
