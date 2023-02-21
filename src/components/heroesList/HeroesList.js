@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
 import { createSelector } from 'reselect';
 
-import { fetchHeroes, heroDelete } from '../../actions';
+import { fetchHeroes, deleteHero } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
@@ -34,10 +34,7 @@ const HeroesList = () => {
     
 
     function onDelete(id) {
-      request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-         .then((data) => console.log('delete'))
-         .then((data) => dispatch(heroDelete(id)))
-         .catch(err => console.log(err))
+      dispatch(deleteHero(request, id))
     }
 
     if (heroesLoadingStatus === "loading") {

@@ -3,7 +3,7 @@ import ReduxThunk from 'redux-thunk';
 import filters from '../reducers/filters';
 import heroes from '../reducers/heroes';
 
-
+// our custom middleware
 const stringMiddfleware = (store) => (next) => (action) => {
    // in dispatch by default we can pass only an object.
    // This middleware make real passing string to dispatch method and assign it as action

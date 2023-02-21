@@ -1,4 +1,4 @@
-export const fetchHeroes = (request, url) => (dispatch) => {
+export const fetchHeroes = (request) => (dispatch) => {
    dispatch(heroesFetching);
    request("http://localhost:3001/heroes")
       .then((heroes) => dispatch(heroesFetched(heroes)))
@@ -57,12 +57,13 @@ export const activeFilterChanged = (filter) => {
    };
 };
 
-export const heroDelete = (id) => {
-   return {
-      type: "HERO_DELETED",
-      payload: id,
-   };
-};
+export const deleteHero = (request, id) => (dispatch) => {
+   request(`http://localhost:3001/heroes/${id}`, 'DELETE')
+   .then((data) => console.log('delete'))
+   .then((data) => dispatch({type: "HERO_DELETED", payload: id}))
+   .catch(err => console.log(err))
+}
+
 export const heroCreate = (heroes) => {
    return {
       type: "HERO_CREATED",
