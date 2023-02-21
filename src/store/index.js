@@ -1,5 +1,4 @@
-import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
-import ReduxThunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import filters from '../reducers/filters';
 import heroes from '../reducers/heroes';
 
@@ -19,34 +18,12 @@ const stringMiddfleware = (store) => (next) => (action) => {
    return next(action); 
 }
 
-// enhancer can work not only with dispatch but also with other thing to improve our store.
-// const enhancer  = (createStore) => (...args) => {
-//    const store = createStore(...args);
-
-//    const oldDispatch = store.dispatch;
-//    store.dispatch = (action) => {
-//       if(typeof action === 'string') {
-//          return oldDispatch({
-//             type:  action
-//          })
-//       }
-
-//       return oldDispatch(action); 
-//    } 
-
-//    return store;
-// }
-
-const store = createStore(
-                  combineReducers({filters, heroes}), 
-                  compose(
-                     applyMiddleware(ReduxThunk, stringMiddfleware),
-                     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-                  )
-                  // compose(
-                  //    enhancer,
-                  //    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-                  // )
-                  );
+const store = configureStore({
+   reducer: { heroes, filters },
+   // redux-toolkid includes popular middlewares such as thunk by default (getDefaultMiddleware) 
+   //  and you can add new middleware with concat method
+   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddfleware),
+   devTools: process.env.NODE_ENV !== 'production',
+})
 
 export default store;
