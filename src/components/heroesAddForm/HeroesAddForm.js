@@ -1,10 +1,10 @@
 
-import { heroCreate } from '../../actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { v4 as uuid } from 'uuid';
 
+import { heroCreated } from '../heroesList/heroesSlice';
 
 const HeroesAddForm = () => {
    const [heroName, setHeroName] = useState('');
@@ -34,7 +34,7 @@ const HeroesAddForm = () => {
      
       request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
          .then(data => console.log('success'))
-         .then(data => dispatch(heroCreate(newHero)))
+         .then(data => dispatch(heroCreated(newHero)))
          .catch(err  => console.log(err))
          resetInputs();
    }
