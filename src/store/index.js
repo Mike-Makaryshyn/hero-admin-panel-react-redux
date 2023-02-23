@@ -4,11 +4,11 @@ import heroes from '../components/heroesList/heroesSlice';
 
 // our custom middleware
 const stringMiddfleware = (store) => (next) => (action) => {
-   // in dispatch by default we can pass only an object.
+   //dispatch by default we can pass only an object.
    // This middleware make real passing string to dispatch method and assign it as action
    // Middleware can work only with dispatch (next = dispatch)
    // if we wanna pass function in dispatch instead of an object we can use redux thunk
-   // the biggest reason for this is to add some async function in dispatch instead of obj. Therefore we can work witth request for instance in dispatch directly which makes posiible to reuse this dispatch.
+   // the biggest reason for this is to add some async function in dispatch instead of obj. Therefore we can work witth request for instance  in in dispatch directly which makes posiible to reuse this dispatch.
     if(typeof action === 'string') {
       return next({
          type:  action

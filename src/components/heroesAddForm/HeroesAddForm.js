@@ -3,15 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import { v4 as uuid } from 'uuid';
+import store from '../../store';
 
 import { heroCreated } from '../heroesList/heroesSlice';
+import { selectAll } from '../heroesFilters/filtersSlice';
 
 const HeroesAddForm = () => {
    const [heroName, setHeroName] = useState('');
    const [heroDescription, setHeroDescription] = useState('');
    const [heroElement, setHeroElement] = useState('');
 
-   const {filters, filtersLoadingStatus}  = useSelector (state => state.filters);
+   const {filtersLoadingStatus}  = useSelector (state => state.filters);
+   const filters = selectAll(store.getState());
 
    const dispatch = useDispatch();
    const {request} = useHttp();
@@ -35,8 +38,8 @@ const HeroesAddForm = () => {
       request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
          .then(data => console.log('success'))
          .then(data => dispatch(heroCreated(newHero)))
-         .catch(err  => console.log(err))
-         resetInputs();
+         .catch(err  => console.log(err));
+      resetInputs();
    }
 
    const renderFilters = (filters, status) => {

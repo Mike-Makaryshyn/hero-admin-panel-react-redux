@@ -1,10 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import {useHttp} from '../../hooks/http.hook';
 
-const initialState = {
-    heroes: [],
-    heroesLoadingStatus: 'idle'
-}
+const heroesAdapter = createEntityAdapter();
+
+const initialState = heroesAdapter.getInitialState({
+   heroesLoadingStatus: 'idle'
+});
 
 export const fetchHeroes = createAsyncThunk(
     'heroes/fetchHeroes',
@@ -19,10 +20,10 @@ const heroesSlice = createSlice({
     initialState,
     reducers: {
         heroCreated: (state, action) => {
-            state.heroes.push(action.payload);
+            heroesAdapter.addOne(state, action.payload)
         },
         heroDeleted: (state, action) => {
-            state.heroes = state.heroes.filter(item => item.id !== action.payload);
+            heroesAdapter.removeOne(state, action.payload)
         }
     },
     extraReducers: (builder) => {
@@ -30,7 +31,7 @@ const heroesSlice = createSlice({
             .addCase(fetchHeroes.pending, state => {state.heroesLoadingStatus = 'loading'})
             .addCase(fetchHeroes.fulfilled, (state, action) => {
                 state.heroesLoadingStatus = 'idle';
-                state.heroes = action.payload;
+                heroesAdapter.setAll(state, action.payload);
             })
             .addCase(fetchHeroes.rejected, state => {
                 state.heroesLoadingStatus = 'error';
@@ -39,10 +40,23 @@ const heroesSlice = createSlice({
     }
 });
 
+const {selectAll} = heroesAdapter.getSelectors(state => state.heroes)
+
+const filteredHeroesSelector = createSelector(
+   (state) => state.filters.activeFilter,
+   selectAll,
+   (activeFilter,  heroes) => { 
+      if(activeFilter === 'all') return heroes;
+  
+      return heroes.filter(item => item.element === activeFilter)
+   }
+)
+
 const {actions, reducer} = heroesSlice;
+const {heroCreated, heroDeleted} = actions;
 
 export default reducer;
-export const {
-    heroCreated,
-    heroDeleted
-} = actions;
+
+
+
+export {heroCreated, heroDeleted, filteredHeroesSelector};

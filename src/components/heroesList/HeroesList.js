@@ -2,28 +2,15 @@ import { useHttp } from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CSSTransition, TransitionGroup} from 'react-transition-group';
-import { createSelector } from 'reselect';
 
-import { heroDeleted, fetchHeroes } from './heroesSlice';
+import { heroDeleted, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
 
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
 
-   const filteredHeroesSelector = createSelector(
-      // createSelector is used for otimization useSelect since it rerender on every state change (for instance click on all filter server times == several rerenders of our component)
-      (state) => state.filters.activeFilter,
-      (state) => state.heroes.heroes,
-      (activeFilter,  heroes) => { 
-         if(activeFilter === 'all') return heroes;
-     
-         return heroes.filter(item => item.element === activeFilter)
-      }
-   )
-
-   const filteredHeroes = useSelector(filteredHeroesSelector);
-
+    const filteredHeroes = useSelector(filteredHeroesSelector);
     const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
     const dispatch = useDispatch();
     const { request } = useHttp();

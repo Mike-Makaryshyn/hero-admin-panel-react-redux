@@ -23,30 +23,41 @@
       "name": "Мишаня",
       "description": "Hello, I was looking for you!",
       "element": "water"
+    },
+    {
+      "id": "36db3343-1ccc-47f5-bb7b-cf86871c920f",
+      "name": "mi5hqaaaaov@gmail.com",
+      "description": "addas",
+      "element": "water"
     }
   ],
   "filters": [
     {
+      "id": "bd72-1bd4-4510-9670",
       "name": "all",
       "label": "All",
       "className": "btn-outline-dark"
     },
     {
+      "id": "bd72-1bd4-4510-960",
       "name": "fire",
       "label": "Fire",
       "className": "btn-danger"
     },
     {
+      "id": "bd72-1bd4-4510-96",
       "name": "water",
       "label": "Water",
       "className": "btn-primary"
     },
     {
+      "id": "bd72-1bd4-451-960",
       "name": "wind",
       "label": "Wind",
       "className": "btn-success"
     },
     {
+      "id": "bd72-1bd4-410-960",
       "name": "earth",
       "label": "Earth",
       "className": "btn-secondary"
