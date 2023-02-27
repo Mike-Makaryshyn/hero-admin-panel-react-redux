@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import filters from '../components/heroesFilters/filtersSlice';
-import heroes from '../components/heroesList/heroesSlice';
+import { heroesApi } from '../api/apiSlice';
 
 // our custom middleware
 const stringMiddfleware = (store) => (next) => (action) => {
@@ -19,10 +19,10 @@ const stringMiddfleware = (store) => (next) => (action) => {
 }
 
 const store = configureStore({
-   reducer: { heroes, filters },
+   reducer: { filters, [heroesApi.reducerPath]: heroesApi.reducer },
    // redux-toolkid includes popular middlewares such as thunk by default (getDefaultMiddleware) 
    //  and you can add new middleware with concat method
-   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddfleware),
+   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddfleware, heroesApi.middleware),
    devTools: process.env.NODE_ENV !== 'production',
 })
 
